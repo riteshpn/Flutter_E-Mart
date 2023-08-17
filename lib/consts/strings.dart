@@ -64,3 +64,7 @@ sellerPolicy = "Seller Policy",
 returnPolicy = "Return Policy",
 supportPolicy = "Support Policy",
 productsyoumaylike = "Products you may also like";
+
+// profile string 
+
+const wishlist  = "My Wishlist", orders ="My Orders",messages = "Message";

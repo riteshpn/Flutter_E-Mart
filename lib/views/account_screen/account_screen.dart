@@ -1,4 +1,6 @@
 import 'package:emart_app/consts/consts.dart';
+import 'package:emart_app/consts/list.dart';
+import 'package:emart_app/views/account_screen/components/detail_card.dart';
 import 'package:emart_app/widget_common/bg_widget.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -9,20 +11,23 @@ class ProfileScreen extends StatelessWidget {
     return bgWidget(
         child: Scaffold(
       body: SafeArea(
-          child: Container(
-        padding: EdgeInsets.all(8),
-        child: Column(
-          //mainAxisAlignment: ,
-          children: [
-            //edit profile button
-            Align(
+          child: Column(
+        //mainAxisAlignment: ,
+        children: [
+          //edit profile button
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Align(
                 alignment: Alignment.topRight,
                 child: const Icon(
                   Icons.edit,
                   color: whiteColor,
                 ).onTap(() {})),
+          ),
 
-            Row(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Row(
               children: [
                 Image.asset(imgProfile2, width: 80, fit: BoxFit.cover)
                     .box
@@ -44,24 +49,58 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ],
             ),
-            20.heightBox,
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                "00".text.fontFamily(bold).color(darkFontGrey).size(16).make(),
-                5.heightBox,
-                "in your cart".text.color(darkFontGrey).make()
-              ],
-            )
-                .box
-                .white
-                .rounded
-                .width(context.screenWidth / 3.5)
-                .height(60)
-                .padding(EdgeInsets.all(4))
-                .make(),
-          ],
-        ),
+          ),
+          20.heightBox,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              detailsCard(
+                  count: "00",
+                  title: "in your cart",
+                  width: context.screenWidth / 3.4),
+              detailsCard(
+                  count: "32",
+                  title: "in your wishlist",
+                  width: context.screenWidth / 3.4),
+              detailsCard(
+                  count: "675",
+                  title: "your order",
+                  width: context.screenWidth / 3.4),
+            ],
+          ),
+          // button section
+          //40.heightBox,
+          ListView.separated(
+                  shrinkWrap: true,
+                  separatorBuilder: (context, index) {
+                    return const Divider(
+                      color: lightGrey,
+                    );
+                  },
+                  itemCount: profileButtonList.length,
+                  itemBuilder: (BuildContext context, index) {
+                    return ListTile(
+                        leading: Image.asset(
+                          profileButtonIcon[index],
+                          width: 22,
+                        ),
+                        title: "${profileButtonList[index]}"
+                            .text
+                            .fontFamily(semibold)
+                            .color(darkFontGrey)
+                            .make());
+                  })
+              .box
+              .white
+              .rounded
+              .margin(EdgeInsets.all(12))
+              .padding(EdgeInsets.symmetric(horizontal: 16))
+              .shadowSm
+              .make()
+              .box
+              .color(redColor)
+              .make(),
+        ],
       )),
     ));
   }
